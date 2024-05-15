@@ -53,6 +53,7 @@ def main() -> None:
         
         metadata_dir_path: str = os.path.join(TEMP_DIR_PATH, RAW_DATA_BLOB_NAME)
         os.makedirs(metadata_dir_path)
+        all_metadata: dict[str, dict[str, list[str]]] = {}
         
         for key, value in TESIS_COLLECTIONS.items():
 
@@ -61,7 +62,6 @@ def main() -> None:
                         f"{PUCP_REST_ADDRESS}collections/{value}/items?limit=1000"
                 )
                 items: list[dict[str, Any]] = items_request.json()
-                all_metadata: dict[str, dict[str, list[str]]] = {}
 
                 print(f"Retrieving metadata and downloading text for all {len(items)} items")
                 print(" ---+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5")
