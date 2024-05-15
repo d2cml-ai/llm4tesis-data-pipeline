@@ -61,7 +61,7 @@ def main() -> None:
                         f"{PUCP_REST_ADDRESS}collections/{value}/items?limit=1000"
                 )
                 items: list[dict[str, Any]] = items_request.json()
-                all_metadata: list[dict[str, dict[str, list[str]]]] = []
+                all_metadata: dict[str, dict[str, list[str]]] = {}
 
                 print(f"Retrieving metadata and downloading text for all {len(items)} items")
                 print(" ---+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5")
@@ -74,7 +74,7 @@ def main() -> None:
                                 get_open_document(metadata_dir_path, item_uuid, item_metadata)
                         if "plaintext_available" not in item_metadata.keys():
                                 item_metadata["plaintext_available"] = ["No"]
-                        all_metadata.append({item_uuid: item_metadata})
+                        all_metadata.update({item_uuid: item_metadata})
         
         print("Writing metadata JSON")        
         metadata_file_path: str = os.path.join(metadata_dir_path, "metadata.json")
