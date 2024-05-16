@@ -34,7 +34,7 @@ def write_plaintext(path: str, retrieval_link: str, uuid: str) -> None:
                 f"https://tesis.pucp.edu.pe{retrieval_link}"
         )
         plaintext_write_path: str = os.path.join(path, f"{uuid}.txt")
-        with open(plaintext_write_path, "w", encoding="latin1") as f:
+        with open(plaintext_write_path, "w", encoding="utf-8-sig") as f:
                 f.write(plaintext_request.text)
 
 def get_open_document(path: str, uuid: str, item_metadata: dict[str, list[str]]) -> None:
@@ -79,7 +79,7 @@ def main() -> None:
         print("Writing metadata JSON")        
         metadata_file_path: str = os.path.join(metadata_dir_path, "metadata.json")
 
-        with open(metadata_file_path, "w", encoding="latin1") as f:
+        with open(metadata_file_path, "w", encoding="utf-8-sig") as f:
                 json.dump(all_metadata, f)
 
         print("Zipping and uploading blob")
